@@ -1,6 +1,6 @@
 # Fake-News-Detection
 
-# Step to Run
+# Steps to Run
 
 1. virtualenv venv
 2. venv\Scripts\activate

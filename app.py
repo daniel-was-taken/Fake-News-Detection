@@ -1,31 +1,27 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect
 import numpy as np
 import pickle
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-
 app = Flask(__name__)
 clf = pickle.load(open('models/final_pipeline.pickle', 'rb'))
+result_message = None
 
+@app.route('/',methods= ['GET','POST'])
+def main():
+    return render_template("index.html", result=None)
 
-@app.route('/',methods= ['GET', 'POST'])
+@app.route('/predict',methods= ['POST'])
 def toPredict():
-    return render_template("index.html")
-
-@app.route('/result',methods= ['POST'])
-def result():
-
-    data = request.form['tfTest']
+    global result_message
     
-    # Make a prediction
-    prediction = clf.predict([data])
+    if request.method == 'POST':
+        data = request.form['tfTest']
+        prediction = clf.predict([data])
+        result_message = 'Not Fake' if prediction == 1 else 'Fake'
+    
+    return render_template("index.html", result=result_message)
 
-    # Determine the result message
-    result_message = 'Not Fake' if prediction == 1 else 'Fake'
-
-    return render_template('results.html', result=result_message)
-
-#main driver
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

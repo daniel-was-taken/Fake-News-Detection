@@ -19,9 +19,9 @@ def toPredict():
     if request.method == 'POST':
         data = request.form['tfTest']
         prediction = clf.predict([data])
-        result_message = 'Authentic' if prediction == 1 else 'Fake'
-    
+        result_message = 'Authentic' if prediction == 1 else 'Fake'   
     return render_template("index.html", result=result_message)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

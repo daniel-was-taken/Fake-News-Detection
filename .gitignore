@@ -2,4 +2,4 @@
 /venv
 /spark
 /data/train.csv
-/__pycache__
+/__pycache__/*

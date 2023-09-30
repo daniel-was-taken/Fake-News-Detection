@@ -6,19 +6,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import plotly.express as px
 import pickle
-
-# Get the value of the JAVA_HOME environment variable
-java_home_path = os.environ.get("JAVA_HOME")
-
-findspark.init()
-os.environ["JAVA_HOME"] = java_home_path
-os.environ["SPARK_HOME"] = findspark.find()
-
-spark = SparkSession.builder \
-    .master("local") \
-    .appName("Colab") \
-    .config('spark.ui.port', '4051') \
-    .getOrCreate()
+from sparkinit import spark
 
 df1 = spark.read.csv('data/train.csv', header=True, inferSchema=True)
 
@@ -32,10 +20,7 @@ result_message = 'Authentic' if prediction == 1 else 'Fake'
 
 st.subheader(f"The News is {result_message}")
 
-
-st.title("Spark DataFrame Viewer")
-
-
+st.title("Dataset Analysis")
 
 # Display the first 5 rows of the DataFrame
 st.subheader("Displaying the first 5 rows of the DataFrame:")
@@ -66,12 +51,12 @@ st.write(f"The DataFrame contains {df1.count()} rows.")
 #     st.pyplot(plt)
 
 # Scatter plot
-st.subheader("Scatter Plot:")
-x_axis = st.selectbox("Select the x-axis column:", df1.columns)
-y_axis = st.selectbox("Select the y-axis column:", df1.columns)
-if x_axis and y_axis:
-    scatter_data = df1.select(x_axis, y_axis).toPandas()
-    fig = px.scatter(scatter_data, x=x_axis, y=y_axis, title="Scatter Plot")
-    st.plotly_chart(fig)
+# st.subheader("Scatter Plot:")
+# x_axis = st.selectbox("Select the x-axis column:", df1.columns)
+# y_axis = st.selectbox("Select the y-axis column:", df1.columns)
+# if x_axis and y_axis:
+#     scatter_data = df1.select(x_axis, y_axis).toPandas()
+#     fig = px.scatter(scatter_data, x=x_axis, y=y_axis, title="Scatter Plot")
+#     st.plotly_chart(fig)
 
 # Streamlit code ends here

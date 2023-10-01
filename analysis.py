@@ -7,6 +7,7 @@ import pandas as pd
 import plotly.express as px
 import pickle
 from sparkinit import spark
+from wordcloud import WordCloud
 
 df1 = spark.read.csv('data/train.csv', header=True, inferSchema=True)
 
@@ -33,11 +34,13 @@ st.write(df1.describe().toPandas())
 # Show specific columns
 selected_columns = st.multiselect("Select columns to display:", df1.columns)
 if selected_columns:
-    st.dataframe(df1.select(selected_columns))
+    st.dataframe(df1.select(selected_columns).limit(10))
 
 # Show a count of rows
 st.subheader("Row Count:")
 st.write(f"The DataFrame contains {df1.count()} rows.")
+
+
 
 # # Plot a histogram
 # st.subheader("Histogram:")
@@ -50,7 +53,7 @@ st.write(f"The DataFrame contains {df1.count()} rows.")
 #     plt.ylabel("Frequency")
 #     st.pyplot(plt)
 
-# Scatter plot
+# # Scatter plot
 # st.subheader("Scatter Plot:")
 # x_axis = st.selectbox("Select the x-axis column:", df1.columns)
 # y_axis = st.selectbox("Select the y-axis column:", df1.columns)
@@ -60,3 +63,37 @@ st.write(f"The DataFrame contains {df1.count()} rows.")
 #     st.plotly_chart(fig)
 
 # Streamlit code ends here
+
+st.title("Pie Chart")
+
+lf = df1[df1["label"] == 0].count()
+lt = df1[df1["label"] == 1].count()
+
+labels = ['Authentic', 'Fake']
+sizes = [lt, lf]
+
+fig, ax = plt.subplots()
+ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90)
+ax.axis('equal')  # Equal aspect ratio ensures the pie chart is circular.
+
+# # Display the pie chart using Streamlit
+st.pyplot(fig)
+
+# # Optional: Display the count of Authentic and Fake labels
+st.subheader("Label Counts")
+st.write("Authentic:", lt)
+st.write("Fake:", lf)
+
+
+st.title("Bar Chart")
+
+fig, ax = plt.subplots()
+ax.bar(labels, sizes)
+
+# Add labels and title
+ax.set_xlabel('Category')
+ax.set_ylabel('Count')
+ax.set_title('Authentic vs. Fake Label Counts')
+
+# Display the bar graph using Streamlit
+st.pyplot(fig)

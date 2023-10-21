@@ -7,9 +7,12 @@ import pandas as pd
 import plotly.express as px
 import pickle
 from sparkinit import spark
-from wordcloud import WordCloud
+from sklearn.metrics import confusion_matrix
+from model import X_test, y_test
+import seaborn as sns
 
 df1 = spark.read.csv('data/train.csv', header=True, inferSchema=True)
+
 
 clf = pickle.load(open('models/final_pipeline.pickle', 'rb'))
 # Streamlit code starts here
@@ -97,3 +100,12 @@ ax.set_title('Authentic vs. Fake Label Counts')
 
 # Display the bar graph using Streamlit
 st.pyplot(fig)
+
+# Confusion matrix
+st.title("Confusion Matrix")
+y_pred = clf.predict(X_test)
+cm = confusion_matrix(y_test,y_pred)
+plt.figure(figsize=(6, 4))
+# plt.imshow(cm, interpolation='nearest', cmap=plt.get_cmap('Blues'))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', cbar=False, linewidths=0.5, linecolor='black')
+st.pyplot(plt)

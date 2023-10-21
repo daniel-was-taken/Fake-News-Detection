@@ -44,29 +44,6 @@ st.subheader("Row Count:")
 st.write(f"The DataFrame contains {df1.count()} rows.")
 
 
-
-# # Plot a histogram
-# st.subheader("Histogram:")
-# selected_column_hist = st.selectbox("Select a column for the histogram:", df1.columns)
-# if selected_column_hist:
-#     hist_data = df1.select(selected_column_hist).toPandas()
-#     plt.figure(figsize=(8, 6))
-#     plt.hist(hist_data[selected_column_hist], bins=20, edgecolor='k')
-#     plt.xlabel(selected_column_hist)
-#     plt.ylabel("Frequency")
-#     st.pyplot(plt)
-
-# # Scatter plot
-# st.subheader("Scatter Plot:")
-# x_axis = st.selectbox("Select the x-axis column:", df1.columns)
-# y_axis = st.selectbox("Select the y-axis column:", df1.columns)
-# if x_axis and y_axis:
-#     scatter_data = df1.select(x_axis, y_axis).toPandas()
-#     fig = px.scatter(scatter_data, x=x_axis, y=y_axis, title="Scatter Plot")
-#     st.plotly_chart(fig)
-
-# Streamlit code ends here
-
 st.title("Pie Chart")
 
 lf = df1[df1["label"] == 0].count()

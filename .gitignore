@@ -3,6 +3,6 @@
 /spark
 /data/train.csv
 /__pycache__
-/static
-/templates
+static/
+templates/
 app.py

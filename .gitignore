@@ -2,3 +2,7 @@
 /venv
 /spark
 /data/train.csv
+/__pycache__
+/static/
+/templates/
+app.py

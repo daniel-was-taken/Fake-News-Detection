@@ -2,6 +2,11 @@
 
 train.rar(train.csv) is a dataset that contains textual news articles, the goal is to classify the input article as either "Authentic"  or "Fake". We create a pipeline that combines TF-IDF vectorization and LinearSVC.
 
+# To Test:
+ - Fake: Input an article from https://www.theonion.com/
+ - Authentic: Input an article from https://www.reuters.com/
+
+
 # Steps to Run
 
 1. python -m virtualenv venv

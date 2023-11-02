@@ -17,4 +17,5 @@ train.rar(train.csv) is a dataset that contains textual news articles, the goal 
 5. In the terminal: streamlit analysis.py (Will take some time to run).
 
 # Reference
+- Dataset: https://www.kaggle.com/datasets/emineyetm/fake-news-detection-datasets/data
 - https://www.youtube.com/watch?v=ZE2DANLfBIs

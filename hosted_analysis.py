@@ -1,14 +1,14 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
-import plotly.express as px
+# import plotly.express as px
 import pickle
-from sparkinit import spark
+# from sparkinit import spark
 from sklearn.metrics import confusion_matrix
 from model import X_test, y_test
 import seaborn as sns
 
-df1 = spark.read.csv('data/train.csv', header=True, inferSchema=True)
+df1 = pd.read_csv('data/train.csv', header=True, inferSchema=True)
 
 
 clf = pickle.load(open('models/final_pipeline.pickle', 'rb'))

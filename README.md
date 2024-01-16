@@ -1,5 +1,10 @@
 # Fake News Detection
 
+Check it out: https://fakenewsdetection.streamlit.app/
+
+Hosted_Analysis.py: Does not make use of PySpark
+Analysis.py: Makes use of PySpark
+
 train.rar(train.csv) is a dataset that contains textual news articles, the goal is to classify the input article as either "Authentic"  or "Fake". We create a pipeline that combines TF-IDF vectorization and LinearSVC.
 
 # To Test:

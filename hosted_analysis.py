@@ -16,10 +16,11 @@ clf = pickle.load(open("models/final_pipeline.pickle", "rb"))
 st.title("Fake News Detection")
 
 data = st.text_area(label="Enter News")
-prediction = clf.predict([data])
-result_message = "Authentic" if prediction == 1 else "Fake"
+if data:
+    prediction = clf.predict([data])
+    result_message = "Authentic" if prediction == 1 else "Fake"
+    st.subheader(f"The News is {result_message}")
 
-st.subheader(f"The News is {result_message}")
 
 st.title("Dataset Analysis")
 
